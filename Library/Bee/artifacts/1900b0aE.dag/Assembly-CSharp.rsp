@@ -361,7 +361,10 @@
 "Assets/Logic/Scripts/Pin.cs"
 "Assets/Logic/Scripts/PinPlacer.cs"
 "Assets/Scripts/CameraMovement.cs"
+"Assets/Scripts/DrawArea.cs"
+"Assets/Scripts/Gate.cs"
 "Assets/Scripts/PlayerMovement.cs"
+"Assets/Scripts/Plug.cs"
 -langversion:9.0
 
 /deterministic
