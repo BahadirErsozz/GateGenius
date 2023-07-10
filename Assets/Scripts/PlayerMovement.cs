@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {   
     public Transform orientation;
     public float moveSpeed;
+    public float maxVelocity = 10;
 
     float horizontalInput;
     float verticalInput;
@@ -31,5 +32,9 @@ public class PlayerMovement : MonoBehaviour
         moveDirection =  orientation.forward * verticalInput + orientation.right * horizontalInput;
 
         rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
+        if(rb.velocity.magnitude > maxVelocity)
+        {
+            rb.velocity = moveDirection.normalized * maxVelocity;
+        }
     }
 }
