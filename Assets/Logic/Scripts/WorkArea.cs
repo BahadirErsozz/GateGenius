@@ -94,6 +94,9 @@ public class WorkArea : MonoBehaviour
 
             // Set outline
             outlineEdges[0].material.color = outlineCol;
+            outlineEdges[1].material.color = outlineCol;
+            outlineEdges[2].material.color = outlineCol;
+            outlineEdges[3].material.color = outlineCol;
 
             outlineEdges[0].transform.localPosition = new Vector3(-Width / 2, 0, RenderOrder.BackgroundOutline);
             outlineEdges[1].transform.localPosition = new Vector3(Width / 2, 0, RenderOrder.BackgroundOutline);

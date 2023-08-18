@@ -694,7 +694,11 @@ MonoBehaviour:
   Z: 1
   background: {fileID: 9089407367546558918}
   backgroundCollider: {fileID: 3288264403941298551}
-  outlineEdges: []
+  outlineEdges:
+  - {fileID: 8108499637818372366}
+  - {fileID: 5101888658837668800}
+  - {fileID: 2945555031712023915}
+  - {fileID: 2423050902119770831}
   inputBar: {fileID: 7588677234607859146}
   outputBar: {fileID: 4751301813934259125}
   widthT: 0.473
