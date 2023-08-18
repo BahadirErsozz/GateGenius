@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4073893487397912190}
   - component: {fileID: 4750763570155297105}
   m_Layer: 0
-  m_Name: Chip
+  m_Name: ChipOR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -156,7 +156,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: AND
+  m_text: OR
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c33e17f8c4155864fb769490cf5635af, type: 2}
   m_sharedMaterial: {fileID: -5702233291332414176, guid: c33e17f8c4155864fb769490cf5635af, type: 2}
