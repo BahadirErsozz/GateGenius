@@ -50,15 +50,23 @@ public class MouseController : MonoBehaviour
         Debug.DrawRay(ray.origin, ray.direction * rayLength, Color.red);
         if (IsCreatingWire)
         {
-            //Debug.Log("CreatingWire");  
+
+                //Debug.Log("CreatingWire");  
             if (Physics.Raycast(ray, out hit, rayLength))
             {
-                if (hit.collider.CompareTag("DrawArea")) { 
-                    Debug.Log(hit.point);
-                    UpdateActiveWire(hit.point);
+                if (Input.GetMouseButtonDown(0))
+                {
+                    OnWorkAreaPressed(hit.point);
                 }
+                else if (hit.collider.CompareTag("DrawArea"))
+                    {
+                        Debug.Log(hit.point);
+                        UpdateActiveWire(hit.point);
+                    }
 
-            }
+                }
+            
+
         }
         else if (Input.GetMouseButtonDown(0))
         {      
@@ -134,6 +142,15 @@ public class MouseController : MonoBehaviour
 
         return g;
     }
+
+    void OnWorkAreaPressed(Vector3 pos)
+    {
+        if (IsCreatingWire)
+        {
+            wireUnderConstruction.AddAnchorPoint(pos);
+        }
+    }
+
 
 
 
