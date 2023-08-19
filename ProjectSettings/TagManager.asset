@@ -8,6 +8,7 @@ TagManager:
   - Door
   - Coin
   - DrawArea
+  - Pin
   layers:
   - Default
   - TransparentFX
