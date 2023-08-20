@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.WSA;
 
 public class MouseController : MonoBehaviour
@@ -105,6 +106,10 @@ public class MouseController : MonoBehaviour
                     Transform wireHolder = hit.transform.parent.Find("Wires");
                     Pin pin = hit.transform.gameObject.GetComponent<Pin>();
                     StartCreatingWire(pin, hit.point, wireHolder);
+                }
+                else if (hit.collider.CompareTag("Button"))
+                {
+                    hit.transform.gameObject.GetComponent<Button>().onClick.Invoke();
                 }
             }
 
@@ -274,6 +279,13 @@ public class MouseController : MonoBehaviour
 
         float t = Mathf.Clamp01(Vector3.Dot(aP, aB) / sqrLenAB);
         return lineStart + aB * t;
+    }
+
+    public void setMode(string modeAsString)
+    {
+        Mode newMode = (Mode)System.Enum.Parse(typeof(Mode), modeAsString);
+        mode = newMode;
+
     }
 }
 

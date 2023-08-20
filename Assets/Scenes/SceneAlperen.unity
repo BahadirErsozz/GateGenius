@@ -820,7 +820,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rayLength: 5
-  rayCasterObj: {fileID: 0}
 --- !u!114 &167844175
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -836,6 +835,7 @@ MonoBehaviour:
   sensX: 7
   sensY: 7
   orientation: {fileID: 1935040381}
+  player: {fileID: 0}
 --- !u!81 &167844176
 AudioListener:
   m_ObjectHideFlags: 0
@@ -5415,6 +5415,7 @@ MonoBehaviour:
   maxVelocity: 100
   deceleration: 5
   footstepSound: {fileID: 1935040375}
+  currPlayer: {fileID: 1935040379}
 --- !u!114 &1935040379
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5432,6 +5433,10 @@ MonoBehaviour:
   healthBar: {fileID: 177113222}
   animator: {fileID: 1935040380}
   hitSound: {fileID: 1935040374}
+  isDead: 0
+  deathCamera: {fileID: 0}
+  mainCamera: {fileID: 167844177}
+  animationDuration: 3
 --- !u!95 &1935040380
 Animator:
   serializedVersion: 5

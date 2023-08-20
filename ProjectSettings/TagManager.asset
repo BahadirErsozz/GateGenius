@@ -9,6 +9,7 @@ TagManager:
   - Coin
   - DrawArea
   - Pin
+  - Button
   layers:
   - Default
   - TransparentFX
