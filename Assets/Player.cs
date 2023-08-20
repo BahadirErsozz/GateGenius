@@ -9,6 +9,10 @@ public class Player : MonoBehaviour
 
     public HealthBar healthBar;
 
+    public Animator animator;
+
+    public AudioSource hitSound;
+
     void Start()
     {
         currentHealth = maxHealth;
@@ -29,5 +33,9 @@ public class Player : MonoBehaviour
     {
         currentHealth-= damage;
         healthBar.SetHealth(currentHealth);
+        animator.SetTrigger("damage");
+        hitSound.Play();
     }
+
+    
 }

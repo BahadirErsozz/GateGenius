@@ -76,6 +76,7 @@ public class TrapSpikes : MonoBehaviour
             if (!ListCharacters.Contains(control))
             {
                 ListCharacters.Add(control);
+                control.TakeDamage(20);
             }
         }
     }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,12 +18,16 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody rb;
     Animator animator;
 
+    public AudioSource footstepSound;
+
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         animator = GetComponent<Animator>();
+        footstepSound.volume = 0.07f;
     }
 
     // Update is called once per frame
@@ -52,5 +57,20 @@ public class PlayerMovement : MonoBehaviour
                 rb.velocity = Vector3.zero;
             }
         }
+
+        if(isWalking)
+        {
+            if(footstepSound.enabled != true)
+            {
+                footstepSound.enabled = true;
+            }
+            
+        }
+        else
+        {
+            footstepSound.enabled = false;  
+        }
+
+       
     }
 }
