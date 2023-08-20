@@ -293,6 +293,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3216290298702568008, guid: fde76cf2e74f4dd47b05a6e0274c56fd, type: 3}
       propertyPath: thicknessT
+      value: 0.477
+      objectReference: {fileID: 0}
+    - target: {fileID: 3216290298702568008, guid: fde76cf2e74f4dd47b05a6e0274c56fd, type: 3}
+      propertyPath: ioBarPadding
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4592995781403468448, guid: fde76cf2e74f4dd47b05a6e0274c56fd, type: 3}
@@ -891,7 +895,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sensX: 10
   sensY: 10
+<<<<<<< Updated upstream
   orientation: {fileID: 512023703}
+=======
+  orientation: {fileID: 523065709}
+>>>>>>> Stashed changes
 --- !u!114 &935579969
 MonoBehaviour:
   m_ObjectHideFlags: 0

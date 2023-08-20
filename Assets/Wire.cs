@@ -7,7 +7,7 @@ using UnityEngine;
 public class Wire : MonoBehaviour
 {
     public event System.Action<Wire> WireDeleted;
-    public Pin SourcePin { get; private set; }
+    public Pin SourcePin { get; set; }
     public Pin TargetPin { get; private set; }
     public bool IsConnected { get; private set; }
     public ReadOnlyCollection<Vector3> AnchorPoints => new(anchorPoints);
@@ -52,7 +52,9 @@ public class Wire : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(IsConnected)
+            UpdateDisplayState();
+        Debug.Log(SourcePin == null);
     }
 
     public void UpdateLineRenderer()
@@ -137,6 +139,19 @@ public class Wire : MonoBehaviour
         AddAnchorPoint(pos);
     }
 
+
+    public void UpdateDisplayState()
+    {
+        Pin.HighlightState activeHighlightState = SourcePin.activeHighlightState;
+        Color col = activeHighlightState switch
+        {
+            Pin.HighlightState.None => inActiveColor,
+            Pin.HighlightState.Highlighted => activeColor,
+            _ => Color.black
+        };
+
+        SetColour(col);
+    }
 
 
 }

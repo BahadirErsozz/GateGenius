@@ -130,6 +130,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b1278a8cd8edd24a92385ebe7b5e192, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactionRadius: 1
+  defaultCol: {r: 0.3529412, g: 0, b: 0, a: 0}
+  highlightedCol: {r: 1, g: 0, b: 0, a: 0}
+  highlightedInvalidCol: {r: 0, g: 0, b: 0, a: 0}
+  display: {fileID: 3114395123578435116}
+  activeHighlightState: 0
 --- !u!65 &5657844921104417343
 BoxCollider:
   m_ObjectHideFlags: 0

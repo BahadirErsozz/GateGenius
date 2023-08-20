@@ -113,13 +113,14 @@ public class MouseController : MonoBehaviour
 
     Wire StartCreatingWire(Pin pinToStartFrom,Vector3 startPos, Transform holder)
     {
-        Pin wireStartPin = pinToStartFrom;
+        wireStartPin = pinToStartFrom;
         return StartCreatingWire(startPos, holder);
     }
 
     Wire StartCreatingWire(Vector3 point,Transform holder)
     {
         wireUnderConstruction = Instantiate(wirePrefab,parent: holder);
+        wireUnderConstruction.SourcePin = wireStartPin;
         wireUnderConstruction.SetStartPosition(point);
         return wireUnderConstruction;
     }

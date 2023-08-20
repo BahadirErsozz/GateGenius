@@ -178,8 +178,8 @@ MonoBehaviour:
   wireCurveAmount: 0.25
   wireCurveResolution: 10
   busConnectionDot: {fileID: 4285258579348838838}
-  activeColor: {r: 0.19215687, g: 0, b: 0, a: 0}
-  inActiveColor: {r: 1, g: 0, b: 0, a: 0}
+  activeColor: {r: 1, g: 0, b: 0, a: 0}
+  inActiveColor: {r: 0.3529412, g: 0, b: 0, a: 0}
   anchorPoints: []
 --- !u!1 &8097069102187546841
 GameObject:
