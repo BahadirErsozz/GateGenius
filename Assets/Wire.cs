@@ -23,7 +23,8 @@ public class Wire : MonoBehaviour
     [SerializeField] int wireCurveResolution;
     [SerializeField] MeshRenderer busConnectionDot;
 
-    [SerializeField] Color color;
+    [SerializeField] Color activeColor;
+    [SerializeField] Color inActiveColor;
 
 
 
@@ -39,7 +40,7 @@ public class Wire : MonoBehaviour
 
         anchorPoints = new List<Vector3>();
         drawPoints = new Vector3[0];
-        SetColour(color);
+        SetColour(inActiveColor);
     }
 
     // Start is called before the first frame update
@@ -109,7 +110,6 @@ public class Wire : MonoBehaviour
     }
     void SetColour(Color col, float fadeDuration = 0)
     {
-        busConnectionDot.sharedMaterial.color = col;
         wireRenderer.SetColour(col, fadeDuration);
     }
 

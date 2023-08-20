@@ -54,14 +54,14 @@ public class MouseController : MonoBehaviour
 
 
         Vector3 rayOrigin = new Vector3(0.5f, 0.5f, 0f); // center of the screen
-        float rayLength = 500f;
+        float rayLength = 10f;
         Ray ray = Camera.main.ViewportPointToRay(rayOrigin);
         RaycastHit hit;
         Debug.DrawRay(ray.origin, ray.direction * rayLength, Color.red);
         if (IsCreatingWire)
         {
 
-                //Debug.Log("CreatingWire");  
+            Debug.Log("CreatingWire");  
             if (Physics.Raycast(ray, out hit, rayLength))
             {
                 if (Input.GetMouseButtonDown(0))
@@ -88,8 +88,7 @@ public class MouseController : MonoBehaviour
 
         }
         else if (Input.GetMouseButtonDown(0))
-        {      
-
+        {
             if (Physics.Raycast(ray, out hit, rayLength))
             {
                 Debug.Log(hit.transform.name);

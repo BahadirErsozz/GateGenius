@@ -31,7 +31,7 @@ public class PlayerMovement : MonoBehaviour
 
         moveDirection =  orientation.forward * verticalInput + orientation.right * horizontalInput;
 
-        rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
+        rb.AddForce(moveDirection.normalized * moveSpeed * 10f * Time.deltaTime, ForceMode.Force);
         if(rb.velocity.magnitude > maxVelocity)
         {
             rb.velocity = moveDirection.normalized * maxVelocity;
