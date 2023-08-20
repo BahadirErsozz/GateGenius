@@ -20,6 +20,8 @@ public class PlayerMovement : MonoBehaviour
 
     public AudioSource footstepSound;
 
+    public Player currPlayer;
+
 
     // Start is called before the first frame update
     void Start()
@@ -33,42 +35,51 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        horizontalInput = Input.GetAxisRaw("Horizontal");
-        verticalInput = Input.GetAxisRaw("Vertical");
-
-        moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
-
-        rb.AddForce(moveDirection.normalized * moveSpeed * 5f * Time.deltaTime, ForceMode.Force);
-        if (rb.velocity.magnitude > maxVelocity)
+        if(currPlayer.isDead == false)
         {
-            rb.velocity = moveDirection.normalized * maxVelocity;
-        }
+            horizontalInput = Input.GetAxisRaw("Horizontal");
+            verticalInput = Input.GetAxisRaw("Vertical");
 
-        // Update the walking animation state
-        bool isWalking = Mathf.Abs(horizontalInput) > 0.1f || Mathf.Abs(verticalInput) > 0.1f;
-        animator.SetBool("isWalking", isWalking);
+            moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
-        // Character deceleration when not moving
-        if (!isWalking)
-        {
-            rb.velocity -= rb.velocity * deceleration * Time.deltaTime;
-            if (rb.velocity.magnitude < 0.1f)
+            rb.AddForce(moveDirection.normalized * moveSpeed * 5f * Time.deltaTime, ForceMode.Force);
+            if (rb.velocity.magnitude > maxVelocity)
             {
-                rb.velocity = Vector3.zero;
+                rb.velocity = moveDirection.normalized * maxVelocity;
             }
-        }
 
-        if(isWalking)
-        {
-            if(footstepSound.enabled != true)
+            // Update the walking animation state
+            bool isWalking = Mathf.Abs(horizontalInput) > 0.1f || Mathf.Abs(verticalInput) > 0.1f;
+            animator.SetBool("isWalking", isWalking);
+
+            // Character deceleration when not moving
+            if (!isWalking)
             {
-                footstepSound.enabled = true;
+                rb.velocity -= rb.velocity * deceleration * Time.deltaTime;
+                if (rb.velocity.magnitude < 0.1f)
+                {
+                    rb.velocity = Vector3.zero;
+                }
             }
+
+            if (isWalking)
+            {
+                if (footstepSound.enabled != true)
+                {
+                    footstepSound.enabled = true;
+                }
+
+            }
+            else
+            {
+                footstepSound.enabled = false;
+            }
+
             
         }
         else
         {
-            footstepSound.enabled = false;  
+            footstepSound.enabled = false;
         }
 
        

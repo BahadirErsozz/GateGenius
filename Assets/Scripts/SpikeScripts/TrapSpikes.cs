@@ -38,6 +38,7 @@ public class TrapSpikes : MonoBehaviour
                         SpikeTriggerRoutine = StartCoroutine(_TriggerSpikes());
                     }
                 }
+                
             }
         }
     }

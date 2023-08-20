@@ -13,20 +13,42 @@ public class Player : MonoBehaviour
 
     public AudioSource hitSound;
 
+    public bool isDead ;
+
+    public Camera deathCamera;
+
+    public Camera mainCamera;
+
+    public int animationDuration = 3;
+
+    private bool inBetweenAnimation = false;
+
     void Start()
     {
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
+        hitSound.volume = 0.5f;
+        isDead = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+        if(currentHealth == 0 && isDead == false && !inBetweenAnimation)
         {
-            TakeDamage(20);
-            
-        }
+            animator.SetTrigger("die");
+
+            isDead = true;
+            mainCamera.enabled = false;
+            deathCamera.enabled = true;
+            StartCoroutine(PauseBetweenAnimation());
+        } 
+    }
+    private IEnumerator PauseBetweenAnimation()
+    {
+        inBetweenAnimation = true;
+        yield return new WaitForSeconds(animationDuration);
+        //TODO:change scene
     }
 
     public void TakeDamage(int damage)
@@ -35,6 +57,7 @@ public class Player : MonoBehaviour
         healthBar.SetHealth(currentHealth);
         animator.SetTrigger("damage");
         hitSound.Play();
+        
     }
 
     
