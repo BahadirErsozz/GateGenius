@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
     public Transform orientation;
     public float moveSpeed;
     public float maxVelocity = 10;
+    public float deceleration = 5; // Yavaþlama hýzý
 
     float horizontalInput;
     float verticalInput;
@@ -41,5 +42,15 @@ public class PlayerMovement : MonoBehaviour
         // Update the walking animation state
         bool isWalking = Mathf.Abs(horizontalInput) > 0.1f || Mathf.Abs(verticalInput) > 0.1f;
         animator.SetBool("isWalking", isWalking);
+
+        // Character deceleration when not moving
+        if (!isWalking)
+        {
+            rb.velocity -= rb.velocity * deceleration * Time.deltaTime;
+            if (rb.velocity.magnitude < 0.1f)
+            {
+                rb.velocity = Vector3.zero;
+            }
+        }
     }
 }
