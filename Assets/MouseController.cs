@@ -5,6 +5,9 @@ using UnityEngine.WSA;
 
 public class MouseController : MonoBehaviour
 {
+
+    public event System.Action<Wire> WireCreated;
+
     enum Mode
     {
         AND,
@@ -26,6 +29,13 @@ public class MouseController : MonoBehaviour
     Wire wireStartWire;
     Wire wireUnderConstruction;
     Wire wireUnderMouse;
+
+    bool creatingWireFromPin => IsCreatingWire && wireStartPin != null;
+    bool creatingWireFromWire => IsCreatingWire && wireStartWire != null;
+
+    List<Wire> allConnectedWires;
+    HashSet<(PinType, PinType)> validConnectionsLookup;
+
     // Start is called before the first frame update
     void Start()
     {
