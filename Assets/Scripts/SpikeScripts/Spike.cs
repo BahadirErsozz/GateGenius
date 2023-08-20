@@ -14,7 +14,7 @@ public class Spike : MonoBehaviour
 
     IEnumerator _Shoot()
     {
-        float delay = Random.Range(0f, 0.25f);
+        float delay = 0.1f;
 
         yield return new WaitForSeconds(delay);
 
@@ -31,7 +31,7 @@ public class Spike : MonoBehaviour
 
     IEnumerator _Retract()
     {
-        float delay = Random.Range(0f, 0.25f);
+        float delay = 0.1f;
 
         yield return new WaitForSeconds(delay);
 

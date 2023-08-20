@@ -46,14 +46,14 @@ public class TrapSpikes : MonoBehaviour
     {
 
         SpikesReloaded = false;
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.3f);
 
         foreach (Spike s in ListSpikes)
         {
             s.Shoot();
 
         }
-
+        
         yield return new WaitForSeconds(1f);
 
         foreach (Spike s in ListSpikes)
@@ -85,7 +85,7 @@ public class TrapSpikes : MonoBehaviour
 
         if (control != null)
         {
-            if (!ListCharacters.Contains(control))
+            if (ListCharacters.Contains(control))
             {
                 ListCharacters.Remove(control);
             }
