@@ -6,6 +6,10 @@ public class DoorController : MonoBehaviour
 {   
     [SerializeField] private Animator doorAnimator = null;
     [SerializeField] private int animationDuration = 1;
+
+    public Camera doorCamera;
+    public Camera mainCamera;
+    
     
     private bool isDoorOpen = false;
     private bool inBetweenAnimation = false;
@@ -14,17 +18,17 @@ public class DoorController : MonoBehaviour
         inBetweenAnimation = true;
         yield return new WaitForSeconds(animationDuration);
         inBetweenAnimation = false;
+        mainCamera.enabled = true;
+        doorCamera.enabled = false;
     }
 
     public void PlayAnimation() {
         if (!isDoorOpen && !inBetweenAnimation) {
+            mainCamera.enabled = false;
+            doorCamera.enabled = true;
             doorAnimator.Play("DoorOpen", 0, 0.0f);
             isDoorOpen = true;
             StartCoroutine(PauseBetweenAnimation());
-        } else if (!inBetweenAnimation) {
-            doorAnimator.Play("DoorClose", 0, 0.0f);
-            isDoorOpen = false;
-            StartCoroutine(PauseBetweenAnimation());                
         }
     }
 }
