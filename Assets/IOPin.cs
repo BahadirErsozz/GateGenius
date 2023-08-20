@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class State : MonoBehaviour
+[SelectionBase]
+public class IOPin : MonoBehaviour
 {
     enum IOmode {INPUT,OUTPUT}
     
@@ -10,7 +11,7 @@ public class State : MonoBehaviour
     [SerializeField] Color activeColor;
     [SerializeField] Color inActiveColor;
     [SerializeField] IOmode mode;
-    [SerializeField] Pin.HighlightState state;
+    [SerializeField] public Pin.HighlightState state;
     [SerializeField] MeshRenderer display;
 
     [SerializeField] Pin pin;
@@ -26,6 +27,7 @@ public class State : MonoBehaviour
         if (mode == IOmode.INPUT)
         {
             pin.SetHighlightState(state);
+            
         }
         else if (mode == IOmode.OUTPUT)
         {
@@ -47,5 +49,10 @@ public class State : MonoBehaviour
 
         display.material.color = col;
     }
+    public void SetHighlightState(Pin.HighlightState state)
+    {
+        this.state = state;
+    }
+
 
 }

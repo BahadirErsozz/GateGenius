@@ -639,7 +639,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4592995781403468448}
-  - component: {fileID: 7425884675124991556}
+  - component: {fileID: 8961083104876727110}
   m_Layer: 0
   m_Name: Tablet
   m_TagString: Untagged
@@ -667,22 +667,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7425884675124991556
+--- !u!114 &8961083104876727110
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5912548299036265152}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa6771dfe06ae984aa5fbe1ca32c9c37, type: 3}
+  m_Script: {fileID: 11500000, guid: 609bb495a9f102e4e9c3ebee3122117f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chipPrefab: {fileID: 4750763570155297105, guid: 2a39ff7ffe8b45c41beca97434569719, type: 3}
-  chipHolder: {fileID: 7437389320224044755}
-  DrawingPanel: {fileID: 4535290543974813017}
-  rayLength: 100
+  id: 0
+  questions: []
+  answers: []
+  stepCooldownTime: 3
+  inputPinHolder: {fileID: 26095587634766177}
+  OutPinHolder: {fileID: 2838248949937778764}
 --- !u!1 &6218490527723978725
 GameObject:
   m_ObjectHideFlags: 0

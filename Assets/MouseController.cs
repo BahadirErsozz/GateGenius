@@ -62,7 +62,7 @@ public class MouseController : MonoBehaviour
         if (IsCreatingWire)
         {
 
-            Debug.Log("CreatingWire");  
+            //Debug.Log("CreatingWire");  
             if (Physics.Raycast(ray, out hit, rayLength))
             {
                 if (Input.GetMouseButtonDown(0))
@@ -134,7 +134,7 @@ public class MouseController : MonoBehaviour
         }
         else
         {
-            Debug.Log("UpdateActiveWire:" + point.ToString());
+            //Debug.Log("UpdateActiveWire:" + point.ToString());
             wireUnderConstruction.DrawToPoint(point);
         }
     }

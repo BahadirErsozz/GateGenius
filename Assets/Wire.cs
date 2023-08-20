@@ -52,9 +52,14 @@ public class Wire : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(IsConnected)
+        if (IsConnected)
+        {
             UpdateDisplayState();
-        Debug.Log(SourcePin == null);
+            TargetPin.SetHighlightState(SourcePin.activeHighlightState);
+        }
+            
+            
+        //Debug.Log(SourcePin == null);
     }
 
     public void UpdateLineRenderer()
@@ -98,7 +103,7 @@ public class Wire : MonoBehaviour
     public void ConnectWireToPins(Pin SourcePin, Pin TargetPin)
     {
         IsConnected = true;
-
+        this.TargetPin = TargetPin;
         // Update renderer
         UpdateLineRenderer();
         wireRenderer.SetThickness(GetThickness(false));

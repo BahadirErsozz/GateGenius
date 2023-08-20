@@ -43,7 +43,7 @@ public class Pin : MonoBehaviour
 
     public void SetHighlightState(HighlightState state)
     {
-        Debug.Log("HELP!");
+        //Debug.Log("HELP!");
         activeHighlightState = state;
         Color col = state switch
         {
