@@ -9,7 +9,7 @@ public class DoorController : MonoBehaviour
 
     public Camera doorCamera;
     public Camera mainCamera;
-    
+    public int doorId;
     
     private bool isDoorOpen = false;
     private bool inBetweenAnimation = false;
@@ -22,13 +22,15 @@ public class DoorController : MonoBehaviour
         doorCamera.enabled = false;
     }
 
-    public void PlayAnimation() {
+    public bool PlayAnimation() {
         if (!isDoorOpen && !inBetweenAnimation) {
-            mainCamera.enabled = false;
             doorCamera.enabled = true;
+            mainCamera.enabled = false;
             doorAnimator.Play("DoorOpen", 0, 0.0f);
             isDoorOpen = true;
             StartCoroutine(PauseBetweenAnimation());
+            return false;
         }
+        return true;
     }
 }

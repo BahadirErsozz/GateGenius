@@ -22,6 +22,7 @@ public class MouseController : MonoBehaviour
     [SerializeField] Chip chipNot;
     [SerializeField] Mode mode;
     [SerializeField] Wire wirePrefab;
+    [SerializeField] Camera mainCamera;
     
 
     private Chip chipPrefab;
@@ -55,7 +56,7 @@ public class MouseController : MonoBehaviour
 
         Vector3 rayOrigin = new Vector3(0.5f, 0.5f, 0f); // center of the screen
         float rayLength = 10f;
-        Ray ray = Camera.main.ViewportPointToRay(rayOrigin);
+        Ray ray = mainCamera.ViewportPointToRay(rayOrigin);
         RaycastHit hit;
         Debug.DrawRay(ray.origin, ray.direction * rayLength, Color.red);
         if (IsCreatingWire)

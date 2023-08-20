@@ -18,7 +18,10 @@ public class DoorRaycast : MonoBehaviour
         if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, rayLength)) {
             if(hit.collider.CompareTag(interactableTag)) {
                 if(Input.GetKeyDown(KeyCode.Mouse0)) {
-                    rayCasterObj.PlayAnimation();
+                    GameObject.Find("GameManager").GetComponent<GameManager>().TriggerWonStage(1);
+                }
+                else if(Input.GetKeyDown(KeyCode.Mouse1)){
+                    GameObject.Find("GameManager").GetComponent<GameManager>().TriggerWonStage(2);
                 }
             }
         }
