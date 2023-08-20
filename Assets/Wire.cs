@@ -9,6 +9,7 @@ public class Wire : MonoBehaviour
     public event System.Action<Wire> WireDeleted;
     public Pin SourcePin { get; private set; }
     public Pin TargetPin { get; private set; }
+    public bool IsConnected { get; private set; }
     public ReadOnlyCollection<Vector3> AnchorPoints => new(anchorPoints);
     public Vector3 CurrentDrawToPoint { get; private set; }
 
@@ -73,6 +74,15 @@ public class Wire : MonoBehaviour
             Debug.Log("TOO CLOSE");
     }
 
+    public void SetAnchorPoints(IList<Vector3> points, bool updateGraphics)
+    {
+        anchorPoints = new List<Vector3>(points);
+        if (updateGraphics)
+        {
+            UpdateLineRenderer();
+        }
+    }
+
     public void DeleteWire()
     {
         if (!isDeleted)
@@ -80,6 +90,17 @@ public class Wire : MonoBehaviour
             isDeleted = true;
             Destroy(gameObject);
         }
+    }
+
+    public void ConnectWireToPins(Pin SourcePin, Pin TargetPin)
+    {
+        IsConnected = true;
+
+        // Update renderer
+        UpdateLineRenderer();
+        wireRenderer.SetThickness(GetThickness(false));
+
+
     }
 
     float GetThickness(bool isSelected)

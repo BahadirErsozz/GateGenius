@@ -66,15 +66,24 @@ public class MouseController : MonoBehaviour
             {
                 if (Input.GetMouseButtonDown(0))
                 {
-                    OnWorkAreaPressed(hit.point);
-                }
-                else if (hit.collider.CompareTag("DrawArea"))
+                    if (hit.collider.CompareTag("Pin"))
                     {
                         Debug.Log(hit.point);
-                        UpdateActiveWire(hit.point);
+                        Pin pin = hit.transform.gameObject.GetComponent<Pin>();
+                        OnMouseReleasedOverPin(pin);
                     }
-
+                    else
+                    {
+                        OnWorkAreaPressed(hit.point);
+                    }
+                    
                 }
+                else if (hit.collider.CompareTag("DrawArea"))
+                {
+                     UpdateActiveWire(hit.point);
+                }
+
+            }
             
 
         }
@@ -161,9 +170,113 @@ public class MouseController : MonoBehaviour
         }
     }
 
+    void OnMouseReleasedOverPin(Pin pin)
+    {
+        if (IsCreatingWire)
+        {
+            TryMakeConnection(wireUnderConstruction.SourcePin,pin);
+        }
+    }
+
+    void TryMakeConnection(Pin startPin, Pin endPin)
+    {
+
+            if (creatingWireFromWire)
+            {
+                JoinFromWire(wireStartWire, endPin);
+            }
+            MakeConnection(startPin, endPin);
+        
+    }
+
+
+    void JoinFromWire(Wire targetWire, Pin targetWirePin)
+    {
+        bool copyToSource = targetWire.SourcePin == targetWirePin;
+        List<Vector3> targetWirePoints = new List<Vector3>(targetWire.AnchorPoints);
+        List<Vector3> newWirePoints = new List<Vector3>(wireUnderConstruction.AnchorPoints);
+
+        Vector3 joinPoint = newWirePoints[0];
+        joinPoint = ClosestPointOnPath(joinPoint, targetWirePoints, out int closestSegmentIndex);
+        newWirePoints[0] = joinPoint;
+
+        int anchorIndex = (copyToSource) ? closestSegmentIndex : closestSegmentIndex + 1;
+        do
+        {
+            newWirePoints.Insert(0, targetWirePoints[anchorIndex]);
+            anchorIndex += copyToSource ? -1 : 1;
+        }
+        while (anchorIndex >= 0 && anchorIndex <= targetWirePoints.Count - 1);
+
+        // Insert the join point into the wire we're connecting to, to make the connection look more convincing
+        //targetWirePoints.Insert(closestSegmentIndex + 1, joinPoint);
+        //targetWire.SetAnchorPoints(targetWirePoints, true);
+        wireUnderConstruction.SetAnchorPoints(newWirePoints, true);
+    }
+
+    void MakeConnection(Pin startPin, Pin endPin)
+    {
+
+        wireUnderConstruction.AddAnchorPoint(endPin.transform.position);
+
+        wireUnderConstruction.ConnectWireToPins(startPin, endPin);
+
+        Wire connectedWire = wireUnderConstruction;
+        StopCreatingWire();
+        //OnWireConnected(connectedWire);
+    }
+
+    void OnWireConnected(Wire wire)
+    {
+        allConnectedWires.Add(wire);
+        WireCreated?.Invoke(wire);
+    }
 
 
 
+    public static Vector2 ClosestPointOnPath(Vector3 p, IList<Vector3> path, out int closestSegmentIndex)
+    {
+        Vector3 cp = path[0];
+        float bestDst = float.MaxValue;
+        closestSegmentIndex = 0;
+
+        for (int i = 0; i < path.Count - 1; i++)
+        {
+            Vector3 newP = ClosestPointOnLineSegment(path[i], path[i + 1], p);
+            float sqrDst = (p - newP).sqrMagnitude;
+            if (sqrDst < bestDst)
+            {
+                bestDst = sqrDst;
+                cp = newP;
+                closestSegmentIndex = i;
+            }
+        }
+
+        return cp;
+    }
+
+    public static Vector3 ClosestPointOnPath(Vector3 p, IList<Vector3> path)
+    {
+        return ClosestPointOnPath(p, path, out _);
+    }
+
+    public static Vector3 ClosestPointOnLineSegment(Vector3 lineStart, Vector3 lineEnd, Vector3 p)
+    {
+        Vector3 aB = lineEnd - lineStart;
+        Vector3 aP = p - lineStart;
+        float sqrLenAB = aB.sqrMagnitude;
+        // Handle case where start/end points are in same position (i.e. line segment is just a single point)
+        if (sqrLenAB == 0)
+        {
+            return lineStart;
+        }
+
+        float t = Mathf.Clamp01(Vector3.Dot(aP, aB) / sqrLenAB);
+        return lineStart + aB * t;
+    }
 }
+
+
+
 
 

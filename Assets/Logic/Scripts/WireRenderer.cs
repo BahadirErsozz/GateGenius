@@ -116,7 +116,7 @@ namespace DLS.ChipCreation
 			lineRenderer.useWorldSpace = useWorldSpace;
 		}
 
-		public Vector3 ClosestPointOnWire(Vector3 p)
+        public Vector3 ClosestPointOnWire(Vector3 p)
 		{
 			return ClosestPointOnPath(p, drawPoints);
 		}

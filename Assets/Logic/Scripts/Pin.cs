@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using static logic.Pin;
 
 namespace logic
 {
@@ -11,7 +12,7 @@ namespace logic
     public class Pin : MonoBehaviour
     {
         public enum HighlightState { None, Highlighted, HighlightedInvalid }
-
+        public enum PinType { Unassigned, ChipInputPin, ChipOutputPin, SubChipInputPin, SubChipOutputPin }
 
         [SerializeField] float interactionRadius;
         [SerializeField] Color defaultCol;
@@ -20,6 +21,12 @@ namespace logic
         [SerializeField] MeshRenderer display;
         [SerializeField] HighlightState activeHighlightState;
         public bool IsHighlighted => activeHighlightState != HighlightState.None;
+
+        public bool IsSourcePin => pinType is PinType.ChipInputPin or PinType.SubChipOutputPin;
+        public bool IsTargetPin => !IsSourcePin;
+        public PinType GetPinType() => pinType;
+
+        PinType pinType;
 
         // Start is called before the first frame update
         void Start()
