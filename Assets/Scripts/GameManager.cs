@@ -11,23 +11,45 @@ public class GameManager : MonoBehaviour
 
     public GameObject gameOverUI;
 
+    public GameObject helpImagesUI;
+
+    public GameObject character;
+    public int spawnPointCount = 1;
+    private int currentLevel = 0;
+
+    public Camera mainCamera;
+    public Camera deathCam;
+
+    public Player playerController;
+
+    private Transform[] spawnPoints;
+
 
     // Start is called before the first frame update
     void Start()
     {   
+        spawnPoints = new Transform[spawnPointCount]; 
+        for (int i = 0; i < spawnPointCount; i++) {
+            string spawnPointName = "spawnPoint" + i;
+            spawnPoints[i] = GameObject.Find(spawnPointName).GetComponent<Transform>();
+        }
         //GameObject.Find("WonText").SetActive(true);
         //wonTextAnimator.Play("ShowWonText", 0, 0.0f);
         //GameObject.Find("WonText").SetActive(false);
         gameOverUI.SetActive(false);
+        helpImagesUI.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.H)) {
+            helpImagesUI.SetActive(!helpImagesUI.activeSelf);
+        }
     }
 
     public void TriggerWonStage(int stageNumber){
+        currentLevel = stageNumber;
         string doorName = "door" + stageNumber;
         DoorController doorController = GameObject.Find(doorName).GetComponent<DoorController>();
         bool doorIsOpen = doorController.PlayAnimation();
@@ -49,8 +71,15 @@ public class GameManager : MonoBehaviour
     }
 
     public void restart()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    {   
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        gameOverUI.SetActive(false);
+        mainCamera.enabled = true;
+        deathCam.enabled = false;
+        character.transform.position = spawnPoints[currentLevel].position;
+        playerController.revive();
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void mainMenu()

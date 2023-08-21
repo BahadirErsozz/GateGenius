@@ -24,26 +24,42 @@ public class EnvanterControl : MonoBehaviour
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
+        {   
             imageList[activeIndex].GetComponent<Image>().color = inactive;
-            imageList[0].GetComponent<Image>().color = active;
-            activeIndex = 0 ;
-            mouseController.setMode("AND");
-
+            if(activeIndex == 0) {
+                mouseController.setMode("NONE");
+            }
+            else {
+                imageList[0].GetComponent<Image>().color = active;
+                activeIndex = 0 ;
+                mouseController.setMode("AND");
+            }
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             imageList[activeIndex].GetComponent<Image>().color = inactive;
-            imageList[1].GetComponent<Image>().color = active;
-            activeIndex = 1;
-            mouseController.setMode("NOT");
+            if(activeIndex == 1) {
+                mouseController.setMode("NONE");
+
+            }
+            else {
+                imageList[1].GetComponent<Image>().color = active;
+                activeIndex = 1;
+                mouseController.setMode("NOT");
+            }
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             imageList[activeIndex].GetComponent<Image>().color = inactive;
-            imageList[2].GetComponent<Image>().color = active;
-            activeIndex = 2;
-            mouseController.setMode("OR");
+            if(activeIndex == 2) {
+                mouseController.setMode("NONE");
+
+            }
+            else {
+                imageList[2].GetComponent<Image>().color = active;
+                activeIndex = 2;
+                mouseController.setMode("OR");
+            }
         }
     }
 

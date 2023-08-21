@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GameScene - Cagatay.unity
     guid: 07eec0754cc652545a058b1313219bec
+  - enabled: 1
+    path: Assets/Scenes/GameSceneBahadir.unity
+    guid: 7171c81658b46446eb4385b786bd217f
   m_configObjects: {}

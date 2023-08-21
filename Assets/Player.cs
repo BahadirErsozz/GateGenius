@@ -38,7 +38,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(currentHealth == 0 && isDead == false && !inBetweenAnimation)
+        if(currentHealth <= 0 && isDead == false && !inBetweenAnimation)
         {
             animator.SetTrigger("die");
 
@@ -55,6 +55,7 @@ public class Player : MonoBehaviour
     {
         inBetweenAnimation = true;
         yield return new WaitForSeconds(animationDuration);
+        inBetweenAnimation = false;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         gameManager.gameOver();
@@ -67,6 +68,12 @@ public class Player : MonoBehaviour
         animator.SetTrigger("damage");
         hitSound.Play();
         
+    }
+
+    public void revive(){
+        currentHealth = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
+        isDead = false;
     }
 
     
