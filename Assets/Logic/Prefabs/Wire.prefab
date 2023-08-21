@@ -173,8 +173,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wireRenderer: {fileID: 6085679242262911423}
   edgeCollider: {fileID: 8097069101291120039}
-  wireThickness: 0.065
-  selectedThicknessPadding: 0.025
+  wireThickness: 0.03
+  selectedThicknessPadding: 0.03
   wireCurveAmount: 0.25
   wireCurveResolution: 10
   busConnectionDot: {fileID: 4285258579348838838}

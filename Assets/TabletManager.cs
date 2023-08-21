@@ -26,7 +26,7 @@ public class TabletManager : MonoBehaviour
     private bool inValuation;
     private float nextStep;
 
-
+    public Player player;
 
     // Start is called before the first frame update
     void Start()
@@ -123,6 +123,7 @@ public class TabletManager : MonoBehaviour
 
     void failure()
     {
+        player.TakeDamage(20);
         Debug.Log("Puzzle Failed");
     }
 

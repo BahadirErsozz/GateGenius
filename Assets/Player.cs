@@ -23,6 +23,10 @@ public class Player : MonoBehaviour
 
     private bool inBetweenAnimation = false;
 
+    public GameManager gameManager;
+
+    public GameObject envanterUI;
+
     void Start()
     {
         currentHealth = maxHealth;
@@ -41,14 +45,19 @@ public class Player : MonoBehaviour
             isDead = true;
             mainCamera.enabled = false;
             deathCamera.enabled = true;
+            envanterUI.SetActive(false);
             StartCoroutine(PauseBetweenAnimation());
-        } 
+
+            
+        }
     }
     private IEnumerator PauseBetweenAnimation()
     {
         inBetweenAnimation = true;
         yield return new WaitForSeconds(animationDuration);
-        //TODO:change scene
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        gameManager.gameOver();
     }
 
     public void TakeDamage(int damage)
