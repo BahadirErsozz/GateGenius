@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 
 
@@ -17,6 +18,8 @@ public class TabletManager : MonoBehaviour
     [SerializeField] Transform outHolder;
     [SerializeField] Transform wireHolder;
     [SerializeField] Transform chipHolder;
+    [SerializeField] TMP_Text evaulationText;
+    [SerializeField] float textWaitDuration = 2;
 
 
 
@@ -31,18 +34,13 @@ public class TabletManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        evaulationText.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
         run();
-
-
-        if (Input.GetKey(KeyCode.Alpha5)){
-            runValuation();
-        }
     }
 
 
@@ -51,6 +49,7 @@ public class TabletManager : MonoBehaviour
         inValuation = true;
         stepNum = 0;
         inStep = false;
+        evaulationText.gameObject.SetActive(true);
     }
     public void resetTable()
     {
@@ -68,12 +67,13 @@ public class TabletManager : MonoBehaviour
     {
         if (inValuation)
         {
-            if(Time.time < nextStep)
+            
+            if (Time.time < nextStep)
             {
                 Debug.Log("waiting");
                 return;
             }
-
+            evaulationText.text = "Evaulating(" + (stepNum + 1) + "/" + (Outputs.Length+1) + ")";
 
             //valuation
             if (inStep)
@@ -113,6 +113,7 @@ public class TabletManager : MonoBehaviour
     void puzzleWon()
     {
         Debug.Log("Puzzle Won");
+        StartCoroutine(textFeedback("Congratulations!"));
         GameObject.Find("GameManager").GetComponent<GameManager>().TriggerWonStage(id);
     }
 
@@ -124,6 +125,7 @@ public class TabletManager : MonoBehaviour
     void failure()
     {
         player.TakeDamage(20);
+        StartCoroutine(textFeedback("Failed!"));
         Debug.Log("Puzzle Failed");
     }
 
@@ -166,5 +168,14 @@ public class TabletManager : MonoBehaviour
             children.Add(child.GetComponent<IOPin>());
         }
         return children;
+    }
+
+
+    private IEnumerator textFeedback(string text)
+    {
+        evaulationText.text = text;
+        yield return new WaitForSeconds(textWaitDuration);
+        evaulationText.gameObject.SetActive(false);
+
     }
 }
