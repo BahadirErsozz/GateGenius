@@ -10,8 +10,12 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI wonText;
 
     public GameObject gameOverUI;
-
-    public GameObject helpImagesUI;
+    
+    public GameObject HelpImagesLvl1;
+    public GameObject HelpImagesLvl2;
+    public GameObject HelpImagesLvl3;
+    public GameObject HelpImagesLvl4;
+    public GameObject HelpImagesLvl5;
 
     public GameObject character;
     public int spawnPointCount = 1;
@@ -36,15 +40,20 @@ public class GameManager : MonoBehaviour
         //GameObject.Find("WonText").SetActive(true);
         //wonTextAnimator.Play("ShowWonText", 0, 0.0f);
         //GameObject.Find("WonText").SetActive(false);
-        gameOverUI.SetActive(false);
-        helpImagesUI.SetActive(false);
+        gameOverUI.SetActive(false);    
     }
 
     // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.H)) {
-            helpImagesUI.SetActive(!helpImagesUI.activeSelf);
+            switch(currentLevel){
+                case 0:  HelpImagesLvl1.SetActive(!HelpImagesLvl1.activeSelf); break;
+                case 1:  HelpImagesLvl2.SetActive(!HelpImagesLvl2.activeSelf); break;
+                case 2:  HelpImagesLvl3.SetActive(!HelpImagesLvl3.activeSelf); break;
+                case 3:  HelpImagesLvl4.SetActive(!HelpImagesLvl4.activeSelf); break;
+                case 4:  HelpImagesLvl5.SetActive(!HelpImagesLvl5.activeSelf); break;
+            }
         }
     }
 
