@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
 
     public GameObject gameOverUI;
 
+    public GameObject helpImagesUI;
+
 
     // Start is called before the first frame update
     void Start()
@@ -19,12 +21,15 @@ public class GameManager : MonoBehaviour
         //wonTextAnimator.Play("ShowWonText", 0, 0.0f);
         //GameObject.Find("WonText").SetActive(false);
         gameOverUI.SetActive(false);
+        helpImagesUI.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.H)) {
+            helpImagesUI.SetActive(!helpImagesUI.activeSelf);
+        }
     }
 
     public void TriggerWonStage(int stageNumber){

@@ -6,6 +6,6 @@ using UnityEngine.SceneManagement;
 public class StartSceneHandler : MonoBehaviour
 {
     public void handleClickStartButton() {
-        SceneManager.LoadScene("GameScene - Cagatay");
+        SceneManager.LoadScene("GameSceneBahadir");
     }
 }

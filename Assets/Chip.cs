@@ -57,7 +57,7 @@ public class Chip : MonoBehaviour
 
     public bool computeOR()
     {
-        bool result = true;
+        bool result = false;
         foreach (Pin pin in inputtPins)
         {
             result = result || pin.IsHighlighted;

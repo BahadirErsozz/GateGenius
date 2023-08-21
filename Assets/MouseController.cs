@@ -14,7 +14,8 @@ public class MouseController : MonoBehaviour
     {
         AND,
         OR,
-        NOT
+        NOT,
+        NONE
     }
 
     public bool IsCreatingWire => wireUnderConstruction != null;
@@ -96,7 +97,7 @@ public class MouseController : MonoBehaviour
             {
                 Debug.Log(hit.transform.name);
             
-                if (hit.collider.CompareTag("DrawArea"))
+                if (hit.collider.CompareTag("DrawArea") && mode != Mode.NONE)
                 {
                     Transform holder = hit.transform.Find("Chips");
                     addGate(hit.point, holder);
