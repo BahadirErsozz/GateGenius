@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI wonText;
 
     public GameObject gameOverUI;
+    public GameObject gameWonUI;
+    public GameObject envanterUI;
     
     public GameObject HelpImagesLvl1;
     public GameObject HelpImagesLvl2;
@@ -18,7 +20,7 @@ public class GameManager : MonoBehaviour
     public GameObject HelpImagesLvl5;
 
     public GameObject character;
-    public int spawnPointCount = 1;
+    public int spawnPointCount = 5;
     private int currentLevel = 0;
 
     public Camera mainCamera;
@@ -58,6 +60,13 @@ public class GameManager : MonoBehaviour
     }
 
     public void TriggerWonStage(int stageNumber){
+        if (stageNumber > spawnPointCount) return;
+        if (stageNumber == spawnPointCount) {
+            gameWonUI.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            return;
+        }
         currentLevel = stageNumber;
         string doorName = "door" + stageNumber;
         DoorController doorController = GameObject.Find(doorName).GetComponent<DoorController>();
@@ -75,8 +84,6 @@ public class GameManager : MonoBehaviour
     public void gameOver()
     {
         gameOverUI.SetActive(true);
-        
-
     }
 
     public void restart()
@@ -84,11 +91,18 @@ public class GameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         gameOverUI.SetActive(false);
+        gameWonUI.SetActive(false);
         mainCamera.enabled = true;
         deathCam.enabled = false;
         character.transform.position = spawnPoints[currentLevel].position;
         playerController.revive();
+        envanterUI.SetActive(true);
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void restartFromWın()
+    {   
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void mainMenu()

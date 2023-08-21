@@ -73,7 +73,7 @@ public class TabletManager : MonoBehaviour
                 Debug.Log("waiting");
                 return;
             }
-            evaulationText.text = "Evaulating(" + (stepNum + 1) + "/" + (Outputs.Length+1) + ")";
+            evaulationText.text = "Evaulating(" + (stepNum + 1) + "/" + (Outputs.Length) + ")";
 
             //valuation
             if (inStep)
