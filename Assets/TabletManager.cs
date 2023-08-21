@@ -15,6 +15,8 @@ public class TabletManager : MonoBehaviour
     [SerializeField] float stepCooldown;
     [SerializeField] Transform inHolder;
     [SerializeField] Transform outHolder;
+    [SerializeField] Transform wireHolder;
+    [SerializeField] Transform chipHolder;
 
 
 
@@ -49,6 +51,17 @@ public class TabletManager : MonoBehaviour
         inValuation = true;
         stepNum = 0;
         inStep = false;
+    }
+    public void resetTable()
+    {
+        foreach(Transform c in chipHolder)
+        {
+            Destroy(c.gameObject);
+        }
+        foreach (Transform c in wireHolder)
+        {
+            Destroy(c.gameObject);
+        }
     }
 
     void run()

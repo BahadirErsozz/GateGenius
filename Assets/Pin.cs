@@ -14,6 +14,7 @@ public class Pin : MonoBehaviour
     [SerializeField] Color highlightedInvalidCol;
     [SerializeField] MeshRenderer display;
     [SerializeField] public HighlightState activeHighlightState;
+    [SerializeField] public Transform wireHolder;
     public bool IsHighlighted => activeHighlightState != HighlightState.None;
 
     public bool IsSourcePin => pinType is PinType.ChipInputPin or PinType.SubChipOutputPin;

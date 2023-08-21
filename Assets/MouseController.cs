@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -103,7 +104,7 @@ public class MouseController : MonoBehaviour
                 }
                 else if (hit.collider.CompareTag("Pin"))
                 {
-                    Transform wireHolder = hit.transform.parent.Find("Wires");
+                    Transform wireHolder = findParentWithTag("Tablet", hit.transform).Find("Wires");
                     Pin pin = hit.transform.gameObject.GetComponent<Pin>();
                     StartCreatingWire(pin, hit.point, wireHolder);
                 }
@@ -286,6 +287,23 @@ public class MouseController : MonoBehaviour
         Mode newMode = (Mode)System.Enum.Parse(typeof(Mode), modeAsString);
         mode = newMode;
 
+    }
+
+
+
+
+    Transform findParentWithTag(String tagToFind, Transform startingObject)
+    {
+        Transform parent = startingObject.parent;
+        while (parent != null)
+        {
+            if (parent.tag == tagToFind)
+            {
+                return parent;
+            }
+            parent = parent.parent;
+        }
+        return null;
     }
 }
 
